@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+import sys
 import re
 
 class VadResult:
@@ -9,8 +10,11 @@ class VadResult:
         self.falram = 0.00
         self.error = 0.00
         self.miss = 0.00
+        self.file = ''
 
     def parse(self, file):
+        self.file = file
+
         fp = open(file, 'r')
         allLines = fp.readlines()
         fp.close()
@@ -46,9 +50,23 @@ class VadResult:
         self.error = splitedError[1]
         self.miss = splitedMiss[1]
 
+    # for test
+    def print_str(self):
+        print 'file : ', self.file
+        print 'precision =', self.precision
+        print 'recall =', self.recall
+        print 'falram =', self.falram
+        print 'error =', self.error
+        print 'miss =', self.miss
+
     @staticmethod
     def main(file):
         vadResult = VadResult()
         vadResult.parse(file)
+        vadResult.print_str()
 
-VadResult.main(r'sx500_assist\vad_result_mono.txt')
+if len(sys.argv) == 2:
+    file = sys.argv[1]
+else:
+    file = r'sx500_assist\vad_result_mono.txt'
+VadResult.main(file)
