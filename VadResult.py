@@ -65,8 +65,9 @@ class VadResult:
         vadResult.parse(file)
         vadResult.print_str()
 
-if len(sys.argv) == 2:
-    file = sys.argv[1]
-else:
-    file = r'sx500_assist\vad_result_mono.txt'
-VadResult.main(file)
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        file = sys.argv[1]
+    else:
+        file = r'sx500_assist\vad_result_mono.txt'
+    VadResult.main(file)

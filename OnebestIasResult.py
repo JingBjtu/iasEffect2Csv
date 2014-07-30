@@ -62,7 +62,6 @@ class OnebestIasResult:
         self.s = splited_s[1]
         self.i = splited_i[1]
         self.n = splited_n[1]
-        pass
 
     def print_str(self):
         print 'file :', self.file
@@ -81,8 +80,9 @@ class OnebestIasResult:
         onebest.print_str()
     pass
 
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    filename = r'sx500_assist\onebest_IAS_mono\result.txt'
-OnebestIasResult.main(filename)
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        filename = sys.argv[1]
+    else:
+        filename = r'sx500_assist\onebest_IAS_mono\result.txt'
+    OnebestIasResult.main(filename)
