@@ -31,7 +31,10 @@ class OnebestIasResult:
             elif line_num_after_overall_result >= 0:
                 line_num_after_overall_result += 1
                 if line_num_after_overall_result == 2:
+                    self.line = every_line
                     self._parse_line(every_line)
+
+        self._cal_error_rate()
 
     def _parse_line(self, line):
         r"""e.g. line like
@@ -63,10 +66,19 @@ class OnebestIasResult:
         self.i = splited_i[1]
         self.n = splited_n[1]
 
+    def _cal_error_rate(self):
+        self.replace_error = float(self.s) / float(self.n) * 100
+        self.delete_error = float(self.d) / float(self.n) * 100
+        self.insert_error = float(self.i) / (float(self.n) + float(self.i)) * 100
+
     def print_str(self):
         print 'file :', self.file
+        print 'line :', self.line.rstrip()
         print 'corr =', self.corr
         print 'acc =', self.acc
+        print 'replace error =', self.replace_error
+        print 'delete error =', self.delete_error
+        print 'insert error =', self.insert_error
         print 'h =', self.h
         print 'd =', self.d
         print 's =', self.s
